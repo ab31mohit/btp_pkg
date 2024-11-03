@@ -63,3 +63,27 @@ You can choose any of `burger` or `waffle_pi`. I chose `burger` for now :
 ```
 echo "export TURTLEBOT3_MODEL=burger" >> ~/.bashrc
 ```
+## Using the package :
+
+### 1. Simulating multiple goal waypoints in gazebo :  
+- Launch the gazebo world   
+```
+ros2 launch turtlebot3_gazebo empty_world.launch.py
+```
+- Launch the rviz in a new terminal
+```
+ros2 launch btp_pkg rviz.launch.py
+```
+- Run the waypoints node in a new terminal
+```
+ros2 run btp_pkg waypoints_node.py
+```
+The default waypoints are as follows :   
+`[ (3.0, 1.0), (4.0, 2.0), (2.0, 3.0) ]`   
+
+We can change the number of waypoints and their values but there is still some need of improvement to consider all cases.   
+
+The output should be something like this : 
+<div align="center">
+  <img src="media/waypoints_simulation.png" alt="Outout of waypoints navigation node" />
+</div> 

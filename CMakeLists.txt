@@ -30,6 +30,13 @@ install(
   DESTINATION share/${PROJECT_NAME}/launch
 )
 
+# source your rviz folder in CMake
+install(
+  DIRECTORY
+  rviz/
+  DESTINATION share/${PROJECT_NAME}/rviz
+)
+
 install(PROGRAMS
   src/goal_node.py
   src/trajectory_node.py

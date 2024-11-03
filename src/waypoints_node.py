@@ -41,7 +41,7 @@ class WaypointNode(Node):
         # Waypoints list - add your waypoints here
         self.waypoints = [
             (3.0, 1.0),    # First waypoint
-            (1.0, 4.0),    # Second waypoint
+            (4.0, 2.0),    # Second waypoint
             (2.0, 3.0),    # Third waypoint
             # Add more waypoints as needed
         ]
