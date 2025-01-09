@@ -1,3 +1,5 @@
+![GitHub repo size](https://img.shields.io/github/repo-size/ab31mohit/btp_pkg)
+
 # BTP Doc
 This ros2 package is the implementation of things i've done as part of my BTP under [Prof. Arnab Dey](https://www.iitr.ac.in/~EE/Arnab_Dey).    
 This doc provides step by step process to setup this package & check the results on either the turtlebot3 hardware or in gazebo simulation.
