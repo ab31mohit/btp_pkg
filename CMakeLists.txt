@@ -23,26 +23,19 @@ if(BUILD_TESTING)
   ament_lint_auto_find_test_dependencies()
 endif()
 
-# source your launch folder in CMake
-install(
-  DIRECTORY
-  launch/
-  DESTINATION share/${PROJECT_NAME}/launch
-)
-
-# source your rviz folder in CMake
-install(
-  DIRECTORY
-  rviz/
-  DESTINATION share/${PROJECT_NAME}/rviz
-)
-
 install(PROGRAMS
   src/goal_node.py
   src/trajectory_node.py
   src/waypoints_node.py
 
   DESTINATION lib/${PROJECT_NAME}
+)
+
+install(DIRECTORY
+  launch
+  param
+  rviz
+  DESTINATION share/${PROJECT_NAME}/
 )
 
 ament_package()
