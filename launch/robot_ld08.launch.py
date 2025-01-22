@@ -11,9 +11,9 @@ def generate_launch_description():
     return LaunchDescription([
         Node(
             package='ld08_driver',
-            node_executable='ld08_driver',
-            node_name='ld08_driver',
-            node_namespace='burger_1',  # <--- CHANGE THIS to your desired robot namespace
+            executable='ld08_driver',
+            name='ld08_driver',
+            namespace='burger_1',  # <--- CHANGE THIS to your desired robot namespace
             output='screen'),
     ])
 

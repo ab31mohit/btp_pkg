@@ -13,11 +13,16 @@ from launch_ros.actions import Node
 def generate_launch_description():
     TURTLEBOT3_MODEL = os.environ['TURTLEBOT3_MODEL']
     LDS_MODEL = os.environ['LDS_MODEL']
-    LDS_LAUNCH_FILE = '/hlds_laser.launch.py'
     ROBOT_NAMESPACE = os.environ['TURTLEBOT3_NAMESPACE']  # get the namespace for this robot from the environment variable
+    try:
+        if LDS_MODEL == 'LDS-02':
+            LDS_LAUNCH_FILE = '/robot_ld08.launch.py'
+    except:
+        print('Please make sure you have correct LDS_MODEL (LDS-02)!')
 
     usb_port = LaunchConfiguration('usb_port', default='/dev/ttyACM0')
     print(ROBOT_NAMESPACE)
+    
     tb3_param_dir = LaunchConfiguration(
         'tb3_param_dir',
         default=os.path.join(
@@ -25,19 +30,20 @@ def generate_launch_description():
             'param',
             TURTLEBOT3_MODEL + '.yaml'))
     
-    if LDS_MODEL == 'LDS-01':
-        lidar_pkg_dir = LaunchConfiguration(
-            'lidar_pkg_dir',
-            default=os.path.join(get_package_share_directory('hls_lfcd_lds_driver'), 'launch'))
-    elif LDS_MODEL == 'LDS-02':
-        lidar_pkg_dir = LaunchConfiguration(
-            'lidar_pkg_dir',
-            default=os.path.join(get_package_share_directory('ld08_driver'), 'launch'))
-        LDS_LAUNCH_FILE = '/ld08.launch.py'
-    else:
-        lidar_pkg_dir = LaunchConfiguration(
-            'lidar_pkg_dir',
-            default=os.path.join(get_package_share_directory('hls_lfcd_lds_driver'), 'launch'))
+    # if LDS_MODEL == 'LDS-01':
+    #     lidar_pkg_dir = LaunchConfiguration(
+    #         'lidar_pkg_dir',
+    #         default=os.path.join(get_package_share_directory('hls_lfcd_lds_driver'), 'launch'))
+    # elif LDS_MODEL == 'LDS-02':
+    #     lidar_pkg_dir = LaunchConfiguration(
+    #         'lidar_pkg_dir',
+    #         default=os.path.join(get_package_share_directory('ld08_driver'), 'launch'))
+    #     LDS_LAUNCH_FILE = '/robot_ld08.launch.py'
+    # else:
+    #     lidar_pkg_dir = LaunchConfiguration(
+    #         'lidar_pkg_dir',
+    #         default=os.path.join(get_package_share_directory('hls_lfcd_lds_driver'), 'launch'))
+
 
     use_sim_time = LaunchConfiguration('use_sim_time', default='false')
 
@@ -59,20 +65,21 @@ def generate_launch_description():
 
         IncludeLaunchDescription(
             PythonLaunchDescriptionSource(
-                [ThisLaunchFileDir(), '/turtlebot3_state_publisher.launch.py']),
+                [ThisLaunchFileDir(), '/robot_state_publisher.launch.py']),
             launch_arguments={'use_sim_time': use_sim_time}.items(),
         ),
 
         IncludeLaunchDescription(
-            PythonLaunchDescriptionSource([lidar_pkg_dir, LDS_LAUNCH_FILE]),
+            PythonLaunchDescriptionSource(
+                [ThisLaunchFileDir(), LDS_LAUNCH_FILE]),
             launch_arguments={'port': '/dev/ttyUSB0', 'frame_id': 'base_scan'}.items(),
         ),
 
         Node(
             package='turtlebot3_node',
-            node_executable='turtlebot3_ros',
+            executable='turtlebot3_ros',
             # node_namespace=ROBOT_NAMESPACE,  # Adding namespace for this node
-            node_namespace='burger_1',  # <--- CHANGE THIS to your desired robot namespace
+            namespace='burger_1',  # <--- CHANGE THIS to your desired robot namespace
             parameters=[tb3_param_dir],
             arguments=['-i', usb_port],
             output='screen'),
