@@ -28,6 +28,10 @@ def generate_launch_description():
 
     rsp_params = {'robot_description': robot_desc}
 
+    # remap topics to your desired robot namespace
+    remappings = [('/tf', '/burger_1/tf'),
+                  ('/tf_static', '/burger_1/tf_static')]
+    
     # print (robot_desc) # Printing urdf information.
 
     return LaunchDescription([
@@ -41,5 +45,6 @@ def generate_launch_description():
             # namespace=ROBOT_NAMESPACE,
             namespace='burger_1',  # <--- CHANGE THIS to your desired robot namespace
             output='screen',
-            parameters=[rsp_params, {'use_sim_time': use_sim_time}])
+            parameters=[rsp_params, {'use_sim_time': use_sim_time}],
+            remappings=remappings)
     ])
