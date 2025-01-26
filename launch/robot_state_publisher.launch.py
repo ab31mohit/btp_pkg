@@ -24,13 +24,10 @@ def generate_launch_description():
     # Major refactor of the robot_state_publisher
     # Reference page: https://github.com/ros2/demos/pull/426
     with open(urdf, 'r') as infp:
-        robot_desc = infp.read()
+        robot_desc = infp.read().replace(
+                        'base_footprint', 'burger_1/base_footprint')
 
     rsp_params = {'robot_description': robot_desc}
-
-    # remap topics to your desired robot namespace
-    remappings = [('/tf', '/burger_1/tf'),
-                  ('/tf_static', '/burger_1/tf_static')]
     
     # print (robot_desc) # Printing urdf information.
 
@@ -45,6 +42,5 @@ def generate_launch_description():
             # namespace=ROBOT_NAMESPACE,
             namespace='burger_1',  # <--- CHANGE THIS to your desired robot namespace
             output='screen',
-            parameters=[rsp_params, {'use_sim_time': use_sim_time}],
-            remappings=remappings)
+            parameters=[rsp_params, {'use_sim_time': use_sim_time}])
     ])

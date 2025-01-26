@@ -30,5 +30,5 @@ burger_1:
       odometry:
         publish_tf: true
         use_imu: true
-        frame_id: "odom"
-        child_frame_id: "base_footprint"
+        frame_id: "burger_1/odom"
+        child_frame_id: "burger_1/base_footprint"
