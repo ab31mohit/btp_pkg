@@ -27,6 +27,7 @@ install(PROGRAMS
   src/goal_node.py
   src/trajectory_node.py
   src/waypoints_node.py
+  src/teleop_keyboard.py
 
   DESTINATION lib/${PROJECT_NAME}
 )
