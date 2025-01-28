@@ -13,7 +13,8 @@ from launch_ros.actions import Node
 def generate_launch_description():
     TURTLEBOT3_MODEL = os.environ['TURTLEBOT3_MODEL']
     LDS_MODEL = os.environ['LDS_MODEL']
-    ROBOT_NAMESPACE = os.environ['TURTLEBOT3_NAMESPACE']  # get the namespace for this robot from the environment variable
+    ROBOT_NAMESPACE = os.environ.get('TURTLEBOT3_NAMESPACE', 'default_ns')  # Default to 'default_ns' if not set
+
     try:
         if LDS_MODEL == 'LDS-02':
             LDS_LAUNCH_FILE = '/robot_ld08.launch.py'
@@ -21,15 +22,18 @@ def generate_launch_description():
         print('Please make sure you have correct LDS_MODEL (LDS-02)!')
 
     usb_port = LaunchConfiguration('usb_port', default='/dev/ttyACM0')
-    print(ROBOT_NAMESPACE)
-    
+
+    if ROBOT_NAMESPACE != 'default_ns':
+        print(f'Using user defined namespace : {ROBOT_NAMESPACE}')
+    else:
+        print('Using default namespace : default_ns')
+
     tb3_param_dir = LaunchConfiguration(
         'tb3_param_dir',
         default=os.path.join(
             get_package_share_directory('btp_pkg'),  # <--- CHANGE THIS to your desired bringup package name!
             'param',
             TURTLEBOT3_MODEL + '.yaml'))
-    
 
     use_sim_time = LaunchConfiguration('use_sim_time', default='false')
 
@@ -64,8 +68,7 @@ def generate_launch_description():
         Node(
             package='turtlebot3_node',
             executable='turtlebot3_ros',
-            # node_namespace=ROBOT_NAMESPACE,  # Adding namespace for this node
-            namespace='burger_1',  # <--- CHANGE THIS to your desired robot namespace
+            namespace=ROBOT_NAMESPACE,  # <--- CHANGE THIS to your desired robot namespace
             parameters=[tb3_param_dir],
             arguments=['-i', usb_port],
             output='screen'),

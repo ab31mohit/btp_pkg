@@ -28,6 +28,7 @@ install(PROGRAMS
   src/trajectory_node.py
   src/waypoints_node.py
   src/teleop_keyboard.py
+  src/update_ns_param.py
 
   DESTINATION lib/${PROJECT_NAME}
 )

@@ -9,7 +9,7 @@ from launch_ros.actions import Node
 
 def generate_launch_description():
     TURTLEBOT3_MODEL = os.environ['TURTLEBOT3_MODEL']
-    ROBOT_NAMESPACE = os.environ['TURTLEBOT3_NAMESPACE']  # get the namespace for this robot from the environment variable
+    ROBOT_NAMESPACE = os.environ.get('TURTLEBOT3_NAMESPACE', 'default_ns')  # Default to 'default_ns' namespace if not set
 
     use_sim_time = LaunchConfiguration('use_sim_time', default='false')
     urdf_file_name = 'turtlebot3_' + TURTLEBOT3_MODEL + '.urdf'
@@ -21,11 +21,10 @@ def generate_launch_description():
         'urdf',
         urdf_file_name)
 
-    # Major refactor of the robot_state_publisher
-    # Reference page: https://github.com/ros2/demos/pull/426
+    # changing the base_footprint frame id to include namespace in it
     with open(urdf, 'r') as infp:
         robot_desc = infp.read().replace(
-                        'base_footprint', 'burger_1/base_footprint')
+                        'base_footprint', f'{ROBOT_NAMESPACE}/base_footprint')
 
     rsp_params = {'robot_description': robot_desc}
     
@@ -39,8 +38,7 @@ def generate_launch_description():
         Node(
             package='robot_state_publisher',
             executable='robot_state_publisher',
-            # namespace=ROBOT_NAMESPACE,
-            namespace='burger_1',  # <--- CHANGE THIS to your desired robot namespace
+            namespace=ROBOT_NAMESPACE,  # <--- CHANGE THIS to your desired robot namespace
             output='screen',
             parameters=[rsp_params, {'use_sim_time': use_sim_time}])
     ])

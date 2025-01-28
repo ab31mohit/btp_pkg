@@ -1,4 +1,4 @@
-waffle_1:
+default_ns:
   turtlebot3_node:
     ros__parameters:
 
@@ -23,12 +23,12 @@ waffle_1:
         ir: 0
         sonar: 0
 
-waffle_1:
+default_ns:
   diff_drive_controller:
     ros__parameters:
 
       odometry:
         publish_tf: true
         use_imu: true
-        frame_id: "odom"
-        child_frame_id: "base_footprint"
+        frame_id: "default_ns/odom"
+        child_frame_id: "default_ns/base_footprint"
