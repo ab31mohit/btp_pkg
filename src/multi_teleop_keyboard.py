@@ -114,13 +114,13 @@ def main():
     ns2 = 'burger2'
     ns3 = 'burger3'
 
-    node_name = 'teleop_keyboard'
+    node_name = 'platoon_teleop_keyboard'
     topic_name1 = ns1 + '/cmd_vel'
     topic_name2 = ns2 + '/cmd_vel'
     topic_name3 = ns3 + '/cmd_vel'
 
     qos = QoSProfile(depth=10)
-    node = rclpy.create_node(node_name, namespace=ns)
+    node = rclpy.create_node(node_name)
     pub1 = node.create_publisher(Twist, topic_name1, qos)
     pub2 = node.create_publisher(Twist, topic_name2, qos)
     pub3 = node.create_publisher(Twist, topic_name3, qos)

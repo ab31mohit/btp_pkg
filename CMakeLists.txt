@@ -29,6 +29,7 @@ install(PROGRAMS
   src/waypoints_node.py
   src/teleop_keyboard.py
   src/update_ns_param.py
+  src/multi_teleop_keyboard.py
 
   DESTINATION lib/${PROJECT_NAME}
 )
