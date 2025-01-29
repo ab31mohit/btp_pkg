@@ -219,7 +219,7 @@ You will need to know the ip addresses of all those robots so that you can SSH i
   The log of this file should look like something like this  
 
     <div align="center">
-    <img src="media/ns3-burger_bringup_log.png" alt="Bringup log for burger3" />
+    <img src="media/ns_burger_bringup/ns_bringup_log.png" alt="Bringup log for burger1" />
     </div>   
 
   Here, I'm running ***burger*** (TURTLEBOT3_MODEL) with the namespace ***burger3*** (TURTLEBOT3_NAMESPACE).   
@@ -236,7 +236,7 @@ You will need to know the ip addresses of all those robots so that you can SSH i
   It will show the topics something like this :    
 
     <div align="left">
-    <img src="media/ns3-burger_bringup_topics.png" alt="Ros2 topics for burger3" />
+    <img src="media/ns_burger_bringup/ns_bringup_topics.png" alt="Ros2 topics for burger1" />
     </div>   
 
   Here all the topics of this robot are namespaced with ***burger3*** as i used this as the namespace for this robot except `/tf` and `/tf_static`.   
@@ -251,7 +251,7 @@ You will need to know the ip addresses of all those robots so that you can SSH i
   The content of that file will be like this    
 
     <div align="center">
-    <img src="media/ns3-burger_bringup_tf_frames.png" alt="Transform data for burger3" />
+    <img src="media/ns_burger_bringup/ns_bringup_tf_frames.png" alt="Transform data for burger1" />
     </div> 
 
   Now you can understand that we've only namespaced the frames ***odom*** and ***base_footprint*** of the robot in the global trannsform topics /tf & /tf_static without namespacing these global topics.     
@@ -271,7 +271,7 @@ To understand what i just said above and visualize how the information is travel
   Refresh the rqt_window and select specific checkpoints and it will look something like this    
 
     <div align="center">
-    <img src="media/ns3-burger_bringup_rqt.png" alt="Transform data for burger3" />
+    <img src="media/ns_burger_bringup/ns_bringup_rqt.png" alt="Transform data for burger1" />
     </div>  
   It is clear that all the nodes and topics are namespaced except the */tf* and */tf_static* topics and i already gave the reason for that.   
   
