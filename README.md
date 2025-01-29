@@ -214,9 +214,9 @@ You will need to know the ip addresses of all those robots so that you can SSH i
 - Run bringup file for the robot via above SSH connection :  
 
   ```
-  ros2 launch turtlebot3_bringup robot.launch.py
+  ros2 launch btp_pkg robot_bringup.launch.py
   ```   
-  The log of this file should look something like this  
+  The log of this file should look like something like this  
 
     <div align="center">
     <img src="media/ns3-burger_bringup_log.png" alt="Bringup log for burger3" />
@@ -235,7 +235,7 @@ You will need to know the ip addresses of all those robots so that you can SSH i
   
   It will show the topics something like this :    
 
-    <div align="center">
+    <div align="left">
     <img src="media/ns3-burger_bringup_topics.png" alt="Ros2 topics for burger3" />
     </div>   
 
@@ -260,16 +260,15 @@ You will need to know the ip addresses of all those robots so that you can SSH i
   This `global_odom` will be on that `odom` frame of one of the robots (that we'll choose as our Leader robot in the platoon).    
   Just below you'll see that that i've namespaced all the nodes as well that are associated to the important topics of the robot (to differentiate them with that of others).     
 
-- Understand flow of information using rqt_graph :
+- Understand flow of information using rqt_graph : 
+To understand what i just said above and visualize how the information is travelling between nodes and topics within the ROS environment, we can use rqt_graph.    
 
-  To understand what i just said above and visualize how the information is travelling between nodes and topics within the ROS environment, we can use rqt_graph.
-
-  Run this command to open rqt_graph : 
+- Run this command to open rqt_graph : 
 
   ```bash
   ros2 run rqt_graph rqt_graph
   ```    
-  Refresh the rqt_window and select specific checkboxes and it will look something like this    
+  Refresh the rqt_window and select specific checkpoints and it will look something like this    
 
     <div align="center">
     <img src="media/ns3-burger_bringup_rqt.png" alt="Transform data for burger3" />

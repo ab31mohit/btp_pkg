@@ -24,7 +24,20 @@ def generate_launch_description():
     # changing the base_footprint frame id to include namespace in it
     with open(urdf, 'r') as infp:
         robot_desc = infp.read().replace(
-                        'base_footprint', f'{ROBOT_NAMESPACE}/base_footprint')
+                            'base_footprint', f'{ROBOT_NAMESPACE}/base_footprint'
+                        ).replace(
+                            'base_link', f'{ROBOT_NAMESPACE}/base_link'
+                        ).replace(
+                            'wheel_left_link', f'{ROBOT_NAMESPACE}/wheel_left_link'  
+                        ).replace(
+                            'wheel_right_link', f'{ROBOT_NAMESPACE}/wheel_right_link'
+                        ).replace(
+                            'caster_back_link', f'{ROBOT_NAMESPACE}/caster_back_link'
+                        ).replace(
+                            'imu_link', f'{ROBOT_NAMESPACE}/imu_link'
+                        ).replace(
+                            'base_scan', f'{ROBOT_NAMESPACE}/base_scan'
+                        )
 
     rsp_params = {'robot_description': robot_desc}
     
