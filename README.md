@@ -216,7 +216,7 @@ You will need to know the ip addresses of all those robots so that you can SSH i
   ```
   ros2 launch turtlebot3_bringup robot.launch.py
   ```   
-  The log of this file should look like something like this  
+  The log of this file should look something like this  
 
     <div align="center">
     <img src="media/ns3-burger_bringup_log.png" alt="Bringup log for burger3" />
