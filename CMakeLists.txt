@@ -23,14 +23,12 @@ if(BUILD_TESTING)
   ament_lint_auto_find_test_dependencies()
 endif()
 
-install(PROGRAMS
-  src/goal_node.py
-  src/trajectory_node.py
-  src/waypoints_node.py
-  src/teleop_keyboard.py
-  src/update_ns_param.py
-  src/multi_teleop_keyboard.py
+# Find all Python files in the src directory
+file(GLOB PYTHON_SCRIPTS "src/*.py")
 
+# Install all Python scripts
+install(PROGRAMS
+  ${PYTHON_SCRIPTS}
   DESTINATION lib/${PROJECT_NAME}
 )
 
