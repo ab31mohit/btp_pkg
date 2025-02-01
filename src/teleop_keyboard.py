@@ -109,13 +109,13 @@ def main():
 
     rclpy.init()
     ns = os.environ['TURTLEBOT3_NAMESPACE']
-    node_name = 'teleop_keyboard'
+    node_name = ns + '_teleop_keyboard'
     topic_name = ns + '/cmd_vel'
 
     qos = QoSProfile(depth=10)
     # node = rclpy.create_node('teleop_keyboard')
-    node = rclpy.create_node(node_name, namespace=ns)
-    pub = node.create_publisher(Twist, 'cmd_vel', qos)
+    node = rclpy.create_node(node_name)
+    pub = node.create_publisher(Twist, topic_name, qos)
     # pub = node.create_publisher(Twist, topic_name, qos)
 
     status = 0

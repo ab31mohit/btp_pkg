@@ -39,8 +39,8 @@ class GoalNode(Node):
             QOS_PROFILE_DEFAULT)
         
         # Goal position
-        self.goal_x = 3.0
-        self.goal_y = 1.0
+        self.goal_x = 2.0
+        self.goal_y = 0.5
         
         # Current state
         self.current_x = 0.0
